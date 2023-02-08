@@ -1,0 +1,24 @@
+<div class="main-container">
+    <h2>Sentences</h2>
+
+    <a class="btn-link" routerLink="new">+ Add New Sentence</a>
+
+    <hr />
+    
+    <div class="sentences-container">
+        <ng-container *ngIf="!isLoading && !!(sentences$ | async)?.length">
+            <app-sentence-card 
+                *ngFor="let sentence of sentences$ | async" 
+                [sentence]="sentence"
+            ></app-sentence-card>
+        </ng-container>
+    
+        <ng-container *ngIf="(sentences$ | async)?.length === 0">
+            <p>There are currently no Sentences avaiable.</p>
+        </ng-container>
+
+        <ng-container *ngIf="isLoading">
+            <p class="loading">Loading Sentences.</p>
+        </ng-container>
+    </div>
+</div>

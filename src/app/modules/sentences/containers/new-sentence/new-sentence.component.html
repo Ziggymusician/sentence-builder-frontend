@@ -1,0 +1,9 @@
+<div>
+    <h2>New Sentence</h2>
+    <app-sentence-form 
+        [form]="form"
+        [types]="(types$ | async)!"
+        [words]="(words$ | async)!"
+        (save)="onSaveSentence()"
+    ></app-sentence-form>
+</div>

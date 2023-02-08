@@ -1,0 +1,42 @@
+<form *ngIf="!isSaving" [formGroup]="form" (ngSubmit)="onSave()">
+    <div class="form-control">
+        <label for="type">Type:</label>
+        <select id="type" formControlName="type">
+            <option value="">-- Select Type --</option>
+            <option *ngFor="let type of types" [ngValue]="type.id">{{ type.value }}</option>
+        </select>
+
+        <ng-container *ngIf="isControlInvalid(typeField)">
+            <span class="error" *ngIf="isControlRequired(typeField)">Type is required.</span>
+        </ng-container>
+    </div>
+    <div class="form-control">
+        <label for="word">Word:</label>
+        <select id="word" formControlName="word">
+            <option value="">-- Select Word --</option>
+            <option *ngFor="let word of words" [ngValue]="word">{{ word }}</option>
+        </select>
+        
+        <ng-container *ngIf="isControlInvalid(wordField)">
+            <span class="error" *ngIf="isControlRequired(wordField)">Word is required.</span>
+        </ng-container>
+    </div>
+    <div class="form-control">
+        <label for="sentence">Sentence:</label>
+        <textarea id="sentence" cols="30" rows="10" formControlName="sentence"></textarea>
+
+        <ng-container *ngIf="isControlInvalid(sentenceField)">
+            <span class="error" *ngIf="isControlRequired(sentenceField)">Sentence is required.</span>
+        </ng-container>
+        <ng-container *ngIf="sentenceField.valid">
+            <span class="error" *ngIf="isFormHasError('wordNotUsed')">
+                Sentence doesn't contain chosen word.
+            </span>
+        </ng-container>
+    </div>
+    <button class="btn" type="submit" [ngClass]="{ disabled: form.invalid}" [disabled]="form.invalid">Save</button>
+</form>
+
+<ng-container *ngIf="isSaving">
+    <p class="saving">Saving Sentence...</p>
+</ng-container>

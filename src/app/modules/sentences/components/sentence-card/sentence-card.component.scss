@@ -1,0 +1,18 @@
+:host {
+    border-radius: 4px;
+    border: 1px solid #eee;
+    background-color: #fafafa;
+    max-width: 340px;
+    margin: 0 8px 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    line-height: 24px;
+    
+    /* Responsive Styles */
+    @media screen and (max-width: 767px) {
+        width: 100%;
+    }
+}
