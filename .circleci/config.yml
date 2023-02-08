@@ -5,26 +5,21 @@ version: 2.1
 #   node: circleci/node@5.1.0
 
 jobs:
-  # build:
-  #   docker:
-  #     - image: cimg/node:19.5
-  #   steps:
-  #     - checkout
-  #     - node/install-packages
-  #     - run:
-  #         name: Running Angular build
-  #         command: npm build
-
-  run_tests:
+  build:
     docker:
-      - image: cimg/node:19.5
+      - image: circleci/node:19.5
     steps:
       - checkout
       - run:
-          name: Install npm dependencies
+          name: Installing dependencies
           command: |
             npm install
       - run:
-          name: Run Unit Tests
+          name: Running Angular build
           command: |
-            npm test
+            npm build
+
+workflows:
+  build_test:
+    jobs:
+      - build
