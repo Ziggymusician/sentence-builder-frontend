@@ -44,9 +44,13 @@ export class NewSentenceComponent implements OnInit {
   }
 
   private handleFormChangeEvents(): void {
+    this.handleTypeOnChangeEvent();
+    this.handleWordOnChangeEvent();
+  }
+
+  private handleTypeOnChangeEvent(): void {
     const typeFC = this.form.get('type') as FormControl;
     const wordFC = this.form.get('word') as FormControl;
-    const sentenceFC = this.form.get('sentence') as FormControl;
 
     typeFC.valueChanges
       .pipe(this.unsubscriber.takeUntilDestroy)
@@ -60,6 +64,11 @@ export class NewSentenceComponent implements OnInit {
           wordFC.disable();
         }
       });
+  }
+
+  private handleWordOnChangeEvent(): void {
+    const wordFC = this.form.get('word') as FormControl;
+    const sentenceFC = this.form.get('sentence') as FormControl;
 
     wordFC.valueChanges
       .pipe(this.unsubscriber.takeUntilDestroy)
