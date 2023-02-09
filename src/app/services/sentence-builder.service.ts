@@ -86,7 +86,7 @@ export class SentenceBuilderService {
   public saveSentence(sentence: string): Observable<unknown> {
     let sub: Subscription;
     sub = this.getSentences().subscribe((sentences) => {
-      this.sentences = [...(sentences ? sentences : []), sentence];
+      this.sentences = [sentence, ...(sentences ? sentences : [])];
       if (sub) {
         sub.unsubscribe();
       }
